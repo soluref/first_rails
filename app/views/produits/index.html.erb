@@ -1,0 +1,29 @@
+<% content_for :title do %>
+	<title>Rails Note : Liste des produits</title>
+<% end %>
+
+<h1>Liste des produits</h1>
+ 
+<table>
+  <tr style="border:1px solid red">
+    <th>Titre</th>
+    <th>Prix</th>
+	<th>Quantité</th>
+  </tr>
+ 
+  <% @produits.each do |produit| %>
+    <tr>
+		<td><%= produit.title %></td>
+		<td><%= produit.prix %></td>
+		<td><%= produit.quantite %></td>
+		<td><%= link_to 'Voir', produit_path(produit) %></td>
+		<td><%= link_to 'Editer', edit_produit_path(produit) %></td>	 
+		<% if (current_user && current_user.admin?) %>
+		<td><%= button_to "delete", produit_path(produit), :method=>:delete, :class=>:destroy, confirm: "Are you sure?"%></td>
+		<% end %>
+    </tr>
+  <% end %>
+</table>
+<% if current_user && (current_user.admin? || current_user.editor?) %>
+	<%= link_to 'Nouveau produit', new_produit_path%>
+<% end %>

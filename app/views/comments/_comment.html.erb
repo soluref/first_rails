@@ -1,0 +1,14 @@
+<p>
+  <strong>Commenter:</strong>
+  <%= comment.commenter %>
+</p>
+ 
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+	<%= button_to "Supprimer le commentaire", [comment.article, comment], :method=>:delete, :class=>:destroy, data: { confirm: 'Are you sure?' }%>
+
+</p>
